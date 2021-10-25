@@ -32,5 +32,35 @@ public class ContenidoEmpresas {
 		
 	}
 	
+	public void Grabar_Empleados(String datos) {
+		try{
+			FileWriter archivo_e= new FileWriter("Empleados.txt",true);
+			try(BufferedWriter almacen= new BufferedWriter(archivo_e)){
+				almacen.write(datos+"\n");
+				almacen.close();
+			}
+			archivo_e.close();
+			
+			
+		}catch(Exception ex) {}
+	}
+	
+	public ArrayList<String> Leer_Empleados(){
+		ArrayList<String> datos= new ArrayList<>();
+		try {
+			FileReader archivo = new FileReader("Empleados.txt");
+			BufferedReader lectura= new BufferedReader(archivo);
+			String cadena;
+			
+			while((cadena= lectura.readLine())!=null) {
+				datos.add(cadena); 
+			}
+		}catch(Exception ex) {}
+		return datos;
+		
+	}
+	
+	
+	
 	
 }

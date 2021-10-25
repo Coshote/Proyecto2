@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class VerEmpresa extends JFrame {
+public class VerTrabajadores extends JFrame {
 
 	private JPanel contentPane;
 
@@ -23,7 +23,7 @@ public class VerEmpresa extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VerEmpresa frame = new VerEmpresa();
+					VerTrabajadores frame = new VerTrabajadores();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class VerEmpresa extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VerEmpresa() {
+	public VerTrabajadores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -43,42 +43,40 @@ public class VerEmpresa extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Trabajadores disponibles");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblNewLabel.setBounds(10, 11, 257, 17);
-		contentPane.add(lblNewLabel);
+		JLabel lblTrabajadoresDisponibles = new JLabel("Empresas Disponibles");
+		lblTrabajadoresDisponibles.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblTrabajadoresDisponibles.setBounds(10, 11, 303, 17);
+		contentPane.add(lblTrabajadoresDisponibles);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(10, 51, 303, 199);
 		contentPane.add(textArea);
 		
-		JButton btnNewButton = new JButton("Salir");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Empresa obj= new Empresa();
-				obj.setVisible(true);
-				obj.setLocationRelativeTo(null);
-				dispose();
-				
-		
-			}
-		});
-		btnNewButton.setBounds(335, 227, 89, 23);
-		contentPane.add(btnNewButton);
-		
 		JButton btnNewButton_1 = new JButton("Mostrar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cadena="";
+				String datos="";
 				ContenidoEmpresas conexion = new ContenidoEmpresas();
-				ArrayList<String> Datos= conexion.Leer_Empleados();
+				ArrayList<String> Datos= conexion.Leer();
 				for(String elemento: Datos) {
-					cadena= cadena + elemento + "\n";
+					datos= datos + elemento + "\n";
 				}
-				textArea.setText(cadena);
+				textArea.setText(datos);
 			}
 		});
 		btnNewButton_1.setBounds(323, 52, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Salir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Empleado obj= new Empleado();
+				obj.setVisible(true);
+				obj.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(335, 227, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 }

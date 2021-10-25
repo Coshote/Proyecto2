@@ -74,6 +74,15 @@ public class Empleado extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("A\u00F1adir");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaTrabajador obj= new ListaTrabajador();
+				obj.setVisible(true);
+				obj.setLocationRelativeTo(null);
+				dispose();
+			
+			}
+		});
 		btnNewButton_1.setBounds(37, 144, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
@@ -82,6 +91,14 @@ public class Empleado extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Ver");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VerTrabajadores obj= new VerTrabajadores();
+				obj.setVisible(true);
+				obj.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 		btnNewButton_3.setBounds(294, 144, 89, 23);
 		contentPane.add(btnNewButton_3);
 	}
