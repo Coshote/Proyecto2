@@ -4,7 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Metodos_sql.MetodosE_sql;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -14,13 +19,14 @@ import java.awt.event.ActionEvent;
 public class ListaEmpresa extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNombre;
+	private JTextField txtContacto;
 	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
 	 */
+	MetodosE_sql metodos= new MetodosE_sql();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,20 +56,20 @@ public class ListaEmpresa extends JFrame {
 		lblNewLabel.setBounds(10, 11, 151, 34);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(173, 20, 217, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(173, 20, 217, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
 		JLabel lblNumeroDeContacto = new JLabel("Numero de Contacto");
 		lblNumeroDeContacto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumeroDeContacto.setBounds(10, 56, 151, 34);
 		contentPane.add(lblNumeroDeContacto);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(173, 65, 217, 20);
-		contentPane.add(textField_1);
+		txtContacto = new JTextField();
+		txtContacto.setColumns(10);
+		txtContacto.setBounds(173, 65, 217, 20);
+		contentPane.add(txtContacto);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -78,8 +84,15 @@ public class ListaEmpresa extends JFrame {
 		JButton btnNewButton = new JButton("Grabar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ContenidoEmpresas conexion = new ContenidoEmpresas();
-				conexion.Grabar(textField.getText().toString());
+				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText());
+				if(i>0) {
+					JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "No se pudo guardar los datos");
+					
+				}
+
 				
 			}
 		});

@@ -4,7 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Metodos_sql.MetodosT_sql;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -14,13 +19,14 @@ import java.awt.event.ActionEvent;
 public class ListaTrabajador extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNombre;
+	private JTextField txtContacto;
 	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
 	 */
+	MetodosT_sql metodos= new MetodosT_sql();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,20 +62,20 @@ public class ListaTrabajador extends JFrame {
 		lblNombre.setBounds(10, 11, 151, 34);
 		contentPane_1.add(lblNombre);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(100, 20, 217, 20);
-		contentPane_1.add(textField);
+		txtNombre = new JTextField();
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(100, 20, 217, 20);
+		contentPane_1.add(txtNombre);
 		
 		JLabel lblNumeroDeContacto = new JLabel("Numero de Contacto");
 		lblNumeroDeContacto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumeroDeContacto.setBounds(10, 56, 151, 34);
 		contentPane_1.add(lblNumeroDeContacto);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(173, 65, 217, 20);
-		contentPane_1.add(textField_1);
+		txtContacto = new JTextField();
+		txtContacto.setColumns(10);
+		txtContacto.setBounds(173, 65, 217, 20);
+		contentPane_1.add(txtContacto);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -84,8 +90,16 @@ public class ListaTrabajador extends JFrame {
 		JButton btnNewButton = new JButton("Grabar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ContenidoEmpresas conexion = new ContenidoEmpresas();
-				conexion.Grabar_Empleados(textField.getText().toString());
+				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText());
+				if(i>0) {
+					JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "No se pudo guardar los datos");
+					
+				}
+				
+
 			}
 		});
 		btnNewButton.setBounds(232, 227, 89, 23);

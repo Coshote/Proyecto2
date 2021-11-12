@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 public class Proyecto extends JFrame {
 
 	private JPanel contentPane;
+	public Object lblNombre;
 
 	/**
 	 * Launch the application.
@@ -88,4 +89,5 @@ public class Proyecto extends JFrame {
 		btnNewButton.setBounds(67, 141, 89, 23);
 		contentPane.add(btnNewButton);
 	}
+
 }
