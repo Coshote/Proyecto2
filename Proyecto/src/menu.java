@@ -52,6 +52,7 @@ public class menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				registro ventana= new registro();
 				ventana.setVisible(true);
+				ventana.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
@@ -64,6 +65,7 @@ public class menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				login ventana = new login();
 				ventana.setVisible(true);
+				ventana.setLocationRelativeTo(null);
 				dispose();
 			}
 		});

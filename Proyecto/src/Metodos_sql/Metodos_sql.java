@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JLabel;
+
 public class Metodos_sql {
 	public static ConexionBD conexion= new ConexionBD();
 	public static PreparedStatement sentencia_preparada;
@@ -48,7 +50,7 @@ public class Metodos_sql {
 			if(resultado.next()) {
 				String nombre= resultado.getString("nombre");
 				String apellidos= resultado.getString("apellidos");
-				busqueda_nombre=(nombre+""+apellidos);
+				busqueda_nombre=(nombre+"  "+apellidos);
 			}
 			conexion.close();
 			
@@ -80,6 +82,29 @@ public class Metodos_sql {
 		return busqueda_usuario;
 		
 	}
+	
+	public static String buscarNombre2(String correo) {
+		String busqueda_nombre=null;
+		Connection conexion=null;
+		try {
+			conexion= ConexionBD.conectar();
+			String sentencia_buscar=("SELECT nombre FROM usuarios WHERE correo = '"+correo+"'");
+			sentencia_preparada= conexion.prepareStatement(sentencia_buscar);
+			resultado= sentencia_preparada.executeQuery();
+			if(resultado.next()) {
+				String nombre= resultado.getString("nombre");
+				busqueda_nombre=(nombre);
+			}
+			conexion.close();
+			
+			 		
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return busqueda_nombre;
+	}
+	
+	
 	
 	
 	

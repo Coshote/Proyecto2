@@ -11,17 +11,20 @@ public class MetodosT_sql {
 	public static String sql;
 	public static int resultado_numero=0;
 	
-	public int guardar(String nombre, String telefono) {
+	public int guardar(String nombre, String telefono, String nivel, String profesion) {
 		int resultado=0;
 		Connection conexion=null;
 		
-		String sentencia_guardar=("INSERT INTO lista_trabajadores(nombre,telefono) VALUES(?,?)");
+		String sentencia_guardar=("INSERT INTO lista_trabajadores(nombre,telefono,nivel,profesion) VALUES(?,?,?,?)");
 		
 		try {
 			conexion= ConexionBDT.conectar();
 			sentencia_preparada= conexion.prepareStatement(sentencia_guardar);
 			sentencia_preparada.setString(1,nombre);
 			sentencia_preparada.setString(2,telefono);
+			sentencia_preparada.setString(3,nivel);
+			sentencia_preparada.setString(4,profesion);
+			
 
 			
 			resultado=sentencia_preparada.executeUpdate();

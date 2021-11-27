@@ -8,6 +8,7 @@ public class Main {
 		obj.setVisible(true);
 		obj.setLocationRelativeTo(null);
 
+
 	}
 
 }

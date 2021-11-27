@@ -15,13 +15,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ListaEmpresa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtContacto;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -61,7 +62,7 @@ public class ListaEmpresa extends JFrame {
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JLabel lblNumeroDeContacto = new JLabel("Numero de Contacto");
+		JLabel lblNumeroDeContacto = new JLabel("Correo de Contacto");
 		lblNumeroDeContacto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumeroDeContacto.setBounds(10, 56, 151, 34);
 		contentPane.add(lblNumeroDeContacto);
@@ -71,20 +72,28 @@ public class ListaEmpresa extends JFrame {
 		txtContacto.setBounds(173, 65, 217, 20);
 		contentPane.add(txtContacto);
 		
-		JLabel lblDescripcion = new JLabel("Descripcion");
+		JLabel lblDescripcion = new JLabel("Requisito de Nivel");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDescripcion.setBounds(10, 101, 151, 34);
 		contentPane.add(lblDescripcion);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(10, 130, 398, 61);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		JComboBox comboBoxN = new JComboBox();
+		comboBoxN.setModel(new DefaultComboBoxModel(new String[] {"Ninguno", "B\u00E1sico", "Bachillerato", "Universidad"}));
+		comboBoxN.setBounds(173, 109, 217, 22);
+		contentPane.add(comboBoxN);
+		
+		JComboBox comboBoxP = new JComboBox();
+		comboBoxP.setModel(new DefaultComboBoxModel(new String[] {"Profesion 1", "Profesion 2", "Profesion 3"}));
+		comboBoxP.setBounds(173, 154, 217, 22);
+		contentPane.add(comboBoxP);
 		
 		JButton btnNewButton = new JButton("Grabar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText());
+				String req_n= (String) comboBoxN.getSelectedItem();
+				String req_p= (String) comboBoxP.getSelectedItem();
+				
+				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText(),req_n,req_p);
 				if(i>0) {
 					JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
 					
@@ -110,5 +119,12 @@ public class ListaEmpresa extends JFrame {
 		});
 		btnSalir.setBounds(331, 227, 89, 23);
 		contentPane.add(btnSalir);
+		
+		JLabel lblPlazaHabilitada = new JLabel("Plaza Habilitada");
+		lblPlazaHabilitada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPlazaHabilitada.setBounds(10, 146, 151, 34);
+		contentPane.add(lblPlazaHabilitada);
+		
+
 	}
 }

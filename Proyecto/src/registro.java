@@ -35,6 +35,7 @@ public class registro extends JFrame {
 				try {
 					registro frame = new registro();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -83,6 +84,9 @@ public class registro extends JFrame {
 						String busqueda_nombre=metodos.buscarNombre(txtCorreo.getText());
 						JOptionPane.showMessageDialog(null, "Bienvenido \n"+busqueda_nombre);
 						Proyecto ventana = new Proyecto();
+
+
+						ventana.setLocationRelativeTo(null);
 						ventana.setVisible(true);
 						dispose();
 					}else {

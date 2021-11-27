@@ -15,18 +15,21 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ListaTrabajador extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNombre;
+	JTextField txtNombre;
 	private JTextField txtContacto;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
 	 */
 	MetodosT_sql metodos= new MetodosT_sql();
+	private JLabel lblNombre;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,7 +60,7 @@ public class ListaTrabajador extends JFrame {
 		contentPane_1.setBounds(0, 0, 434, 261);
 		contentPane.add(contentPane_1);
 		
-		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombre.setBounds(10, 11, 151, 34);
 		contentPane_1.add(lblNombre);
@@ -77,20 +80,34 @@ public class ListaTrabajador extends JFrame {
 		txtContacto.setBounds(173, 65, 217, 20);
 		contentPane_1.add(txtContacto);
 		
-		JLabel lblDescripcion = new JLabel("Descripcion");
+		JLabel lblDescripcion = new JLabel("Nivel de Estudios");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDescripcion.setBounds(10, 101, 151, 34);
 		contentPane_1.add(lblDescripcion);
+		JComboBox comboBoxEstu = new JComboBox();
+		comboBoxEstu.setModel(new DefaultComboBoxModel(new String[] {"Ninguno", "B\u00E1sico", "Bachillerato", "Universitario"}));
+		comboBoxEstu.setToolTipText("Seleccion");
+		comboBoxEstu.setBounds(173, 109, 148, 22);
+		contentPane_1.add(comboBoxEstu);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 130, 398, 61);
-		contentPane_1.add(textField_2);
+
+		
+		JComboBox comboBoxProf = new JComboBox();
+		comboBoxProf.setBounds(173, 154, 151, 22);
+		contentPane_1.add(comboBoxProf);
+		
+		comboBoxProf.addItem("Profesion 1");
+		comboBoxProf.addItem("Profesion 2");
+		comboBoxProf.addItem("Profesion 3");
+		
+		
 		
 		JButton btnNewButton = new JButton("Grabar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText());
+				String nivel= (String) comboBoxEstu.getSelectedItem();
+				String prof= (String) comboBoxProf.getSelectedItem();
+				int i=metodos.guardar(txtNombre.getText(),txtContacto.getText(),nivel,prof);
 				if(i>0) {
 					JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
 					
@@ -116,5 +133,19 @@ public class ListaTrabajador extends JFrame {
 		});
 		btnSalir.setBounds(331, 227, 89, 23);
 		contentPane_1.add(btnSalir);
+		
+		JLabel lblProfesuon = new JLabel("Profesion");
+		lblProfesuon.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblProfesuon.setBounds(10, 146, 151, 34);
+		contentPane_1.add(lblProfesuon);
+		
+		
+	}
+	public JLabel getLblNombre() {
+		return lblNombre;
+	}
+	public JTextField getTxtNombre() {
+
+		return txtNombre;
 	}
 }
